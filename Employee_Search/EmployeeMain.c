@@ -31,12 +31,12 @@ NOTE: employeeMain.c should be the same for both of the implementations above.
 #include <stdlib.h>
 //
 //#include "EmployeeOne.c"
-// #include "Employee.h"
+#include "Employee.h"
 // #include "EmployeeTable.c"
 
 int main()
 {
-    const int num = EmployeeTableEntries;
+   // const int num = EmployeeTableEntries;
   //  printf("Number of entries = %d\n", num);
 
     printf("\n------ Current branch: search-multiple-function, testing EmployeeOne.c -----\n\n");
@@ -71,7 +71,7 @@ int main()
     if (matchPtr == NULL) {
         printf("Employee salary is not found in the record.\n");
     } else {
-        printf("Employee salary %d is in record [%ld]]n", matchPtr - EmployeeTable);
+        printf("Employee salary %f is in record [%ld]]n", 100.00, matchPtr - EmployeeTable);
     }
 
 
@@ -97,5 +97,5 @@ int main()
 
     /*** ---------- END defined in employeeSearchOne.c ---------- ***/
 
-	 EXIT_SUCCESS;
+    EXIT_SUCCESS;
 }

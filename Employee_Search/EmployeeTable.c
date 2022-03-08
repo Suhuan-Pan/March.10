@@ -6,7 +6,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "Employee.h"
-#include "EmployeeOne.c"
+// #include "EmployeeOne.c"
 
 // a table of structure
 Employee EmployeeTable[] =

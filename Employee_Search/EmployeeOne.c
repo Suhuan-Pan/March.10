@@ -6,16 +6,9 @@
  * - Search by number and name have already been completed.
  * @Lecture 11 Notes
  *
- * -------------------------------------
+ * - Search by salary / search by phone number
+ * @In-Class_Quiz 2
  *
- * In-Class Quiz 2:  Complete search by phone number and salary:
- * PtrToEmployee searchEmployeeByPhoneNumber (PtrToConstEmployee ptr_to_employee,
-                                           int tableSize,
-                                           char * targetPhoneNumber);
-
- * PtrToEmployee searchEmployeeBySalary (PtrToEmployee ptr_to_employee,
-                                      int tableSize,
-                                      double targetSalary);
  *
  */
 
