@@ -68,7 +68,7 @@ int main()
     // Example found
     // matchPtr = searchEmployeeByPhoneNumber(EmployeeTable, EmployeeTableEntries, "310-555-1215");
     // if (matchPtr != NULL) {
-        printf("=== current ptr at %p, table ptr at %p\n", *matchPtr, *EmployeeTable);
+       // printf("=== current ptr at %p, table ptr at %p\n", *matchPtr, *EmployeeTable);
         // printf("Employee phone number 310-555-1215 is in record [%ld]\n", matchPtr - EmployeeTable);
     // } else {
         // printf("Employee phone number is NOT found in the record.\n");
