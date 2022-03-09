@@ -36,29 +36,24 @@ NOTE: employeeMain.c should be the same for both of the implementations above.
 #include "EmployeeTwo.c"
 
 
-PtrToEmployee searchEmployeeByNumber (PtrToConstEmployee ptr, int size, long number);
-PtrToEmployee searchEmployeeByName (PtrToConstEmployee ptr, int size, char* name);
-
-
-
 int main()
 {
-   // const int num = EmployeeTableEntries;
-  //  printf("Number of entries = %d\n", num);
-
-   //  printf("\n------ Current branch: search-multiple-function, testing EmployeeOne.c -----\n\n");
+       //  printf("\n------ Current branch: search-multiple-function, testing EmployeeOne.c -----\n\n");
     printf("\n------ Current branch: search-single-function, testing EmployeeTwo.c -----\n\n");
 
 
-    /*** ---------- defined in employeeSearchTwo.c ---------- ***/
+    /*** ---------- defined in EmployeeTwo.c ---------- ***/
     PtrToEmployee searchEmployeeByNumber(const Employee table[], int sizeTable, long numberToFind);
 
-    PtrToEmployee searchEmployeeByName(const Employee table[], int sizeTable, char * nameToFind);
+    PtrToEmployee searchEmployeeByName(const Employee table[], int sizeTable, char* nameToFind);
+
+    PtrToEmployee searchEmployeeByPhoneNumber(const Employee table[], int sizeTable, char* phoneToFind);
+
+    PtrToEmployee searchEmployeeBySalary(const Employee table[], int sizeTable, double salaryToFind);
 
 
    // ---------- defined in employeeTable.c ----------
     extern Employee EmployeeTable[];
-
     extern const int EmployeeTableEntries;
 
     // ---------- Declaration ----------
@@ -66,29 +61,29 @@ int main()
 
     /* ------------------------------------------------------------ */
     // Example found
-    // matchPtr = searchEmployeeByPhoneNumber(EmployeeTable, EmployeeTableEntries, "310-555-1215");
-    // if (matchPtr != NULL) {
-       // printf("=== current ptr at %p, table ptr at %p\n", *matchPtr, *EmployeeTable);
-        // printf("Employee phone number 310-555-1215 is in record [%ld]\n", matchPtr - EmployeeTable);
-    // } else {
-        // printf("Employee phone number is NOT found in the record.\n");
-    // }
+    matchPtr = searchEmployeeByPhoneNumber(EmployeeTable, EmployeeTableEntries, "310-555-1215");
+
+    if (matchPtr != NULL) {
+        printf("Employee phone number 310-555-1215 is in record [%ld]\n", matchPtr - EmployeeTable);
+    } else {
+        printf("Employee phone number is NOT found in the record.\n");
+    }
 
     /* ------------------------------------------------------------ */
     // Example not found
-    // matchPtr = searchEmployeeBySalary(EmployeeTable, EmployeeTableEntries, 100.00);
-    // if (matchPtr == NULL) {
-        // printf("Employee salary is not found in the record.\n");
-    // } else {
-        // printf("Employee salary %f is in record [%ld]]n", 100.00, matchPtr - EmployeeTable);
-    // }
+    matchPtr = searchEmployeeBySalary(EmployeeTable, EmployeeTableEntries, 100.00);
 
+    if (matchPtr == NULL) {
+        printf("Employee salary is not found in the record.\n");
+    } else {
+        printf("Employee salary %f is in record [%ld]]n", 100.00, matchPtr - EmployeeTable);
+    }
 
     /* ------------------------------------------------------------ */
     // Example not found
     matchPtr = searchEmployeeByNumber(EmployeeTable, EmployeeTableEntries, 1045);
+
     if (matchPtr != NULL) {
-        // %ld
         printf("Employee ID 1045 is in record [%ld]\n", matchPtr - EmployeeTable);
     } else {
         printf("Employee ID is NOT found in the record.\n");
@@ -97,8 +92,8 @@ int main()
     /* ------------------------------------------------------------*/
     // Example found
     matchPtr = searchEmployeeByName(EmployeeTable, EmployeeTableEntries, "Tony Bobcat");
+
     if (matchPtr != NULL) {
-       // printf("=== current ptr at %p, table ptr at %p\n", *matchPtr, *EmployeeTable);
         printf("Employee Tony Bobcat is in record [%ld]\n", matchPtr - EmployeeTable);
     } else {
         printf("Employee Tony Bobcat is NOT found in the record.\n");
@@ -116,3 +111,14 @@ PtrToEmployee searchEmployeeByNumber (PtrToConstEmployee ptr, int size, long num
 PtrToEmployee searchEmployeeByName (PtrToConstEmployee ptr, int size, char* name) {
     return searchEmployeeTable(ptr, size, name, compareEmployeeName);
 }
+
+/***** part b *****/
+PtrToEmployee searchEmployeeByPhoneNumber(PtrToConstEmployee ptr, int size, char* phone) {
+    return searchEmployeeTable(ptr, size, phone, compareEmployeePhoneNumber);
+}
+
+// assign targetPtr with the address of salary
+PtrToEmployee searchEmployeeBySalary(PtrToConstEmployee ptr, int size, double salary) {
+    return searchEmployeeTable(ptr, size, &salary, compareEmployeeSalary);
+}
+

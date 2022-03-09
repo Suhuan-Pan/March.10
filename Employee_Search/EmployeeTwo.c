@@ -2,19 +2,38 @@
  * EmployeeTwo.c
  * b) Call this branch – single-search-pass-function
  *
- * 
- - Complete searching the table for other entries by passing in the function
- that will perform the search.
+ * function compareEmployeeByPhoneNumber()
+ * function compareEmployeeBySalary()
+ *
  (Make sure employeeOne.c is not located in this branch.)
- 
- * NOTE: employeeMain.c should be the same for both of the implementations above.
  *
  */
 
 #include <string.h>
 #include "Employee.h"
 
+/****************** prototype ******************/
+static PtrToEmployee searchEmployeeTable ( PtrToConstEmployee ptr, int tableSize, const void *targetPtr,
+                                           int (*functionPtr)(const void *, PtrToConstEmployee) );
 
+static int compareEmployeeNumber (const void *targetPtr, PtrToConstEmployee tableValuePtr);
+static int compareEmployeeName (const void *targetPtr, PtrToConstEmployee tableValuePtr);
+
+static int compareEmployeePhoneNumber(const void *targetPtr, PtrToConstEmployee tableValuePtr);
+static int compareEmployeeSalary (const void *targetPtr, PtrToConstEmployee tableValuePtr);
+
+/********** part b **********/
+static int compareEmployeePhoneNumber(const void *targetPtr, PtrToConstEmployee tableValuePtr)
+{
+	// return 0 if not match
+   return strcmp( (char *) targetPtr, tableValuePtr->phone);
+}
+
+static int compareEmployeeSalary (const void *targetPtr, PtrToConstEmployee tableValuePtr) {
+
+   // const void *targetPtr ==> typecast as int pointer then dereference
+   return * (double *) targetPtr != tableValuePtr->salary;
+}
 
 /****************** @lecture 11 notes ******************/
 /**
