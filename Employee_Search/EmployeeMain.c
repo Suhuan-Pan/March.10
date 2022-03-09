@@ -30,9 +30,9 @@ NOTE: employeeMain.c should be the same for both of the implementations above.
 #include <string.h>
 #include <stdlib.h>
 //
-// #include "Employee.h"
-// #include "EmployeeOne.c"
-// #include "EmployeeTable.c"
+#include "Employee.h"
+#include "EmployeeOne.c"
+#include "EmployeeTable.c"
 
 int main()
 {
