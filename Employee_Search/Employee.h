@@ -7,7 +7,7 @@
  *
  */
 
-// #pragma once // guard the header Employee.h
+#pragma once // guard the header Employee.h
 #include <stdio.h>
 #include <stddef.h>
 
