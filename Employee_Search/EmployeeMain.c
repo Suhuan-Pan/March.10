@@ -29,7 +29,7 @@ NOTE: employeeMain.c should be the same for both of the implementations above.
 
 #include <string.h>
 #include <stdlib.h>
-//
+
 #include "Employee.h"
 // #include "EmployeeOne.c"
 #include "EmployeeTable.c"
@@ -38,7 +38,7 @@ NOTE: employeeMain.c should be the same for both of the implementations above.
 
 int main()
 {
-       //  printf("\n------ Current branch: search-multiple-function, testing EmployeeOne.c -----\n\n");
+    //  printf("\n------ Current branch: search-multiple-function, testing EmployeeOne.c -----\n\n");
     printf("\n------ Current branch: search-single-function, testing EmployeeTwo.c -----\n\n");
 
 
