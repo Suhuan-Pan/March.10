@@ -1,0 +1,1 @@
+int grid[ROW_COL][ROW_COL];

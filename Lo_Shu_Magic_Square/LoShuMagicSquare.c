@@ -32,10 +32,17 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
-#include<stdarg.h>
 
 // The Lo Shu Magic Square is a grid with 3 rows and 3 columns.
 #define ROW_COL 3
+
+
+// global variable
+int grid[ROW_COL][ROW_COL];
+
+_Bool isLoShuMagicSquare(int grid[ROW_COL][ROW_COL]);
+
+int *nonRepeated_Randoms ();
 
 
 /*
@@ -43,53 +50,35 @@
  * Write a function that accepts a two-dimensional array as an argument,
  * and determines whether the array is a Lo Shu Magic Square.
  */
-_Bool isLoShuMagicSquare( int twoDArray[ROW_COL][ROW_COL]) {
+_Bool isLoShuMagicSquare(int grid[ROW_COL][ROW_COL]) {
 
-    // main diagonal 1 = [1][1] + [2][2] + [3][3]
-    // main diagonal 2 = [3][1] + [2][2] + [1][3]
-    int sum_mainDiagonal1 = 0, sum_mainDiagonal2 = 0;
+    // check on each row's sum
+    int sum_row = grid[0][0] + grid[0][1] + grid[0][2];
 
-    int sum_col[ROW_COL];
-
-    for (int row = 0; row < ROW_COL; ++row) {
-
-        int sum_row = 0, sum_col = 0;
-        int prev1 = 0, prev2 = 0;
-
-        sum_mainDiagonal1 += twoDArray[row][row];
-        sum_mainDiagonal2 += twoDArray[row][ROW_COL - 1 - row];
-
-        for (int col = 0; col < ROW_COL; ++col) {
-            sum_row += twoDArray[row][col];
-            sum_col += twoDArray[col][row];
-        }
-
-        prev1 = sum_row;
-        prev2 = sum_col;
-
-        if (row > 0) {
-
-            if (sum_row != prev1) {
-                return 0;
-            }
-            if (sum_col != prev2) {
-                return 0;
-            }
-        }
-
-        for (int col = 0; col < ROW_COL; ++col) {
-            printf("%2d", twoDArray[row][col]);
-        }
-
-
-    } // end of for loop
-
-    if (sum_mainDiagonal1 != sum_mainDiagonal2) {
-        // printf("%d != %d\n", sum_mainDiagonal1, sum_mainDiagonal2);
+    // compare it with Top_Left to Bottom_Right diagonal sum
+    if ( (grid[0][0] + grid[1][1] + grid[2][2]) != sum_row ) {
         return 0;
     }
 
-    printf("\n--------------------------------\n");
+
+    // compare it with Top_Right to Bottom_Left diagonal sum
+    if ( (grid[0][2] + grid[1][1] + grid[2][0]) != sum_row ) {
+        return 0;
+    }
+
+
+    for (int row = 1; row < ROW_COL; ++row) {
+        if ( (grid[row][0] + grid[row][1] + grid[row][2]) != sum_row ) {
+            return 0;
+        }
+    } // end of checking row's sum
+
+    for (int col = 0; col < ROW_COL; ++col) {
+        if ( (grid[0][col] + grid[1][col] + grid[2][col]) != sum_row ) {
+            return 0;
+        }
+    } // end of checking col's sum
+
 
     return 1;
 }
@@ -98,11 +87,8 @@ _Bool isLoShuMagicSquare( int twoDArray[ROW_COL][ROW_COL]) {
 /* Create and populate a two-dimensional array with random numbers from 1-9.
  * Recall no number should repeat when populating the array.
  */
-
 // generate a two-D array with different numbers from 1 to 9
 int *nonRepeated_Randoms () {
-
-    srand(time(0));
 
     int i = 0, j;
     int total = ROW_COL * ROW_COL;
@@ -127,7 +113,7 @@ int *nonRepeated_Randoms () {
 
         if (j == i) {
             *(array + i) = n;
-            printf("%d\t", *(array + i));
+          //  printf("%d\t", *(array + i));
             ++i;
         }
 
@@ -148,35 +134,51 @@ int main(void)
 //
 //    isLoShuMagicSquare(test);
 
-    int *array = nonRepeated_Randoms();
 
-    printf("\n");
+    srand(time(NULL));
+    int counter = 0;
 
-    int n = ROW_COL * ROW_COL;
-    int grid[ROW_COL][ROW_COL];
-    int new_line = 0;
+    do {
 
-    for (int i = 0; i < n; ++i) {
+        int *array = nonRepeated_Randoms();
 
-        printf("%-2d", *(array + i));
+        printf("\n");
 
-        if (i % 3 == 2) {
+        int index = 0;
+
+        for (int i = 0; i < ROW_COL; ++i) {
+
+            for (int j = 0; j < ROW_COL; ++j) {
+                grid[i][j] = (*(array + index));
+               // printf("%-2d", grid[i][j]);
+                ++index;
+            }
+
             printf("\n");
-            grid[new_line++][i] = *(array + i);
         }
-    }
-    free(array);
+        free(array);
 
-    printf("\n\n\n");
+        ++counter;
 
-   // isLoShuMagicSquare(grid);
+    } while (isLoShuMagicSquare(grid) == 0);
 
-    if (isLoShuMagicSquare(grid) == 1) {
-        printf("It's a lo shu magic square!\n");
-    } else {
-        printf("It's NOT somewhat magic can happen everytime.\n");
-    }
+
+    printf("Counter = %d\n", counter);
+
+    for (int i = 0; i < ROW_COL; ++i) {
+        printf("[ ");
+
+        for (int j = 0; j < ROW_COL; ++j) {
+            printf("%-2d", grid[i][j]);
+        }
+
+        printf("]\n");
+    } // end of for
+
+   
 
     return 0;
 
 }
+
+
